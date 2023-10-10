@@ -1,0 +1,66 @@
+<html>
+<script>
+    var numberOuterCircles;
+    var innerCircleRadius;
+    var maxRadius;
+
+function drawCircles(numberOuterCircles,innerCircleRadius,maxRadius){
+
+    clearExistingCircles();
+
+    if (innerCircleRadius > maxRadius){
+    innerCircleRadius = maxRadius;
+    outerCircleRadius = 0;
+    }
+
+    var outerCircleRadius = maxRadius - innerCircleRadius;
+
+    var centerX = maxRadius + outerCircleRadius;
+    var centerY = maxRadius + outerCircleRadius;
+
+    var newInnerCircle = document.createElement("div");
+    newInnerCircle.id = "innerCircle";
+    newInnerCircle.style.borderRadius = "50%";
+    newInnerCircle.style.width = 2*innerCircleRadius;
+    newInnerCircle.style.height = 2*innerCircleRadius;
+    newInnerCircle.style.border = "1px solid #980330";
+    newInnerCircle.style.position = "fixed";
+    newInnerCircle.style.top = centerY - innerCircleRadius;
+    newInnerCircle.style.left = centerX - innerCircleRadius;
+    document.body.appendChild(newInnerCircle);
+    
+    var angleStep = (2 * Math.PI) / numberOuterCircles;
+
+    for (var i = 0; i < numberOuterCircles; i++){
+        var angle = (i * angleStep) - Math.PI / 2;
+        var bigRadius = innerCircleRadius + outerCircleRadius;
+        var centerOuterCircleY = centerY + (bigRadius * Math.sin(angle));
+        var centerOuterCircleX = centerX + (bigRadius * Math.cos(angle));
+        var topOuterCircle = centerOuterCircleY - outerCircleRadius;
+        var leftOuterCircle = centerOuterCircleX - outerCircleRadius;
+        var newOuterCircle = document.createElement("div");
+        newOuterCircle.classList.add("outerCircle");
+        newOuterCircle.style.borderRadius = "50%";
+        newOuterCircle.style.width = 2*outerCircleRadius;
+        newOuterCircle.style.height = 2*outerCircleRadius;
+        newOuterCircle.style.border = "1px solid #980330";
+        newOuterCircle.style.position = "fixed";
+        newOuterCircle.style.top = topOuterCircle;
+        newOuterCircle.style.left = leftOuterCircle;
+        document.body.appendChild(newOuterCircle);
+    }
+}
+
+function clearExistingCircles() {
+        var innerCircle = document.getElementById("innerCircle");
+        if (innerCircle) {
+            innerCircle.remove();
+        }
+
+        var outerCircles = document.getElementsByClassName("outerCircle");
+        while (outerCircles.length > 0) {
+            outerCircles[0].remove();
+        }
+}
+</script>
+</html>
