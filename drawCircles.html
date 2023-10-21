@@ -2,21 +2,21 @@
 <script>
     var numberOuterCircles;
     var innerCircleRadius;
-    var maxRadius;
+    var sumRadii;
 
-function drawCircles(numberOuterCircles,innerCircleRadius,maxRadius){
+function drawCircles(numberOuterCircles,innerCircleRadius,sumRadii){
 
     clearExistingCircles();
 
-    if (innerCircleRadius > maxRadius){
-    innerCircleRadius = maxRadius;
+    if (innerCircleRadius > sumRadii){
+    innerCircleRadius = sumRadii;
     outerCircleRadius = 0;
     }
 
-    var outerCircleRadius = maxRadius - innerCircleRadius;
+    var outerCircleRadius = sumRadii - innerCircleRadius;
 
-    var centerX = maxRadius + outerCircleRadius;
-    var centerY = maxRadius + outerCircleRadius;
+    var centerX = sumRadii + outerCircleRadius;
+    var centerY = sumRadii + outerCircleRadius;
 
     var newInnerCircle = document.createElement("div");
     newInnerCircle.id = "innerCircle";
@@ -33,9 +33,9 @@ function drawCircles(numberOuterCircles,innerCircleRadius,maxRadius){
 
     for (var i = 0; i < numberOuterCircles; i++){
         var angle = (i * angleStep) - Math.PI / 2;
-        var bigRadius = innerCircleRadius + outerCircleRadius;
-        var centerOuterCircleY = centerY + (bigRadius * Math.sin(angle));
-        var centerOuterCircleX = centerX + (bigRadius * Math.cos(angle));
+        var sumRadii = innerCircleRadius + outerCircleRadius;
+        var centerOuterCircleY = centerY + (sumRadii * Math.sin(angle));
+        var centerOuterCircleX = centerX + (sumRadii * Math.cos(angle));
         var topOuterCircle = centerOuterCircleY - outerCircleRadius;
         var leftOuterCircle = centerOuterCircleX - outerCircleRadius;
         var newOuterCircle = document.createElement("div");
